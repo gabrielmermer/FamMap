@@ -22,6 +22,13 @@
     <div id="map"></div>
 
     <script>
+
+      // variables needed for the line drawing
+      linesData = [];
+      indexHighscore = 0;
+      markersArray = [];
+
+
       var customLabel = {
         restaurant: {
           label: 'R'
@@ -39,13 +46,20 @@
         var infoWindow = new google.maps.InfoWindow;
 
           // Change this depending on the name of your PHP or XML file
-          downloadUrl('xmldumper.php', function(data) {
+          downloadUrl('data.xml', function(data) {
             var xml = data.responseXML;
+
+            console.log(xml)
+
             var markers = xml.documentElement.getElementsByTagName('marker');
             Array.prototype.forEach.call(markers, function(markerElem) {
               var id = markerElem.getAttribute('id');
+              var currentIndex = markerElem.getAttribute('index');
               var name = markerElem.getAttribute('name');
+              var surname = markerElem.getAttribute('surname');
+              var fullName = name + ' ' + surname
               var address = markerElem.getAttribute('address');
+              var bio = markerElem.getAttribute('bio');
               var type = markerElem.getAttribute('type');
               var point = new google.maps.LatLng(
                   parseFloat(markerElem.getAttribute('lat')),
@@ -53,13 +67,49 @@
 
               var infowincontent = document.createElement('div');
               var strong = document.createElement('strong');
-              strong.textContent = name
+              strong.textContent = fullName
               infowincontent.appendChild(strong);
               infowincontent.appendChild(document.createElement('br'));
 
               var text = document.createElement('text');
               text.textContent = address
               infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+              
+              var biotext = document.createElement('text');
+              biotext.textContent = bio
+              infowincontent.appendChild(biotext);
+              infowincontent.appendChild(document.createElement('br'));
+
+
+              var deadOrAlive = document.createElement('text');
+              deadOrAlive.textContent = type
+              infowincontent.appendChild(deadOrAlive);
+              infowincontent.appendChild(document.createElement('br'));
+
+
+
+              markerDetails = []
+              latlng = {'lat': markerElem.getAttribute('lat'),'lng': markerElem.getAttribute('lng')};
+              markerDetails.push(latlng)
+              markerDetails.push(currentIndex)
+              console.log(markerDetails)
+              linesData.push(markerDetails)
+
+              if(currentIndex > indexHighscore) {
+                indexHighscore = currentIndex
+              };
+              
+              
+              
+
+              markerDetailsForArray = {coords: latlng}, index = currentIndex
+
+              markersArray.push(markerDetailsForArray)              
+              
+
+              console.log('lines data = ', linesData)
+
               var icon = customLabel[type] || {};
               var marker = new google.maps.Marker({
                 map: map,
@@ -71,9 +121,16 @@
                 infoWindow.open(map, marker);
               });
             });
-          });
-        }
 
+            lineDrawing(markersArray);
+          });
+
+          
+        }
+        
+        console.log("****")
+        console.log(markersArray)
+        
 
 
       function downloadUrl(url, callback) {
@@ -93,6 +150,94 @@
       }
 
       function doNothing() {}
+
+      // code imported from index.html
+
+            function lineDrawing(props) {
+
+              console.log("Starting Line drawing...")
+
+              // number used for iteration
+              currentNumber = 0
+
+              // loop to iterate trough dataset
+              while(currentNumber <= indexHighscore) {
+                // temp list containg all markers except one with currentNumber[ID]
+                allOtherList = []
+
+                // current excluded marker
+                currentMarker = linesData[currentNumber]
+                // for debuging
+                console.log("current marker index is: ", linesData[currentNumber])
+                // loop that fills the list with all other markers
+                for(var i = 0; i < linesData.length; i++){
+                  // console.log("!!!",markers[currentNumber][1])
+
+                  if(currentMarker == linesData[i]) {
+                    // skiping the excluded marker
+                  }
+                    
+                  else{
+                    // adding the marker to the AllOtherList
+                    allOtherList.push(linesData[i])
+                    
+                  }
+                }
+                // 4 debug
+                console.log("all ohter list = ", allOtherList)
+                
+                // iterate trough all of the other markes, while searching 4 higher index values
+                for(var i = 0; i < allOtherList.length; i++){
+
+                  // if current marker index is equal to  i + 1 index in all other list 
+                  if(currentMarker[1] == allOtherList[i][1] - 1) {
+                    // console.log("connection made!")
+                    console.log("connection made ",linesData[currentNumber][1], "and", allOtherList[i][1] + 1)
+
+                    // draw the connection
+                    // console.log(linesData[currentNumber])
+
+                  
+                    var line = [
+                      linesData[currentNumber][0],
+                      allOtherList[i][0]
+                      ];
+
+                    
+                    console.log("NEW LINE =",line)
+
+
+                    var flightPath = new google.maps.Polyline({
+                      path: line,
+                      geodesic: true,
+                      strokeColor: '#222',
+                      strokeOpacity: 1.0,
+                      strokeWeight: 5
+                      });
+
+                    flightPath.setMap(map);
+                  }
+                  else {
+                    // console.log("connection not made");
+                  }
+
+
+                  
+
+                }
+                console.log("CURRENT NUMBER IS:", currentNumber, "CHANGING TO ", currentNumber + 1)
+                currentNumber ++;
+
+              };
+
+
+            };
+
+
+      
+
+    
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7JyGUia-GCfFiqUppwk0tqDuMalUAFY0&callback=initMap">
