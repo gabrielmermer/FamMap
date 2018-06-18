@@ -1,0 +1,41 @@
+każdy element ma index
+wszystkie elementy z indexem N mają szukać elementu z indexem N + 1 jeżeli taki istnieje.
+
+data {
+    lang, index,
+    lang, index,
+    lang, index,
+}
+
+indexHighscore = the highest index number in the data
+currentNumber = 0
+
+
+while currentNumber <= indexHighscore:
+
+    make a list out of all other points
+
+    currentPoint = data[currentNumber]
+    for i in data:
+        if i == currentPoint:
+            pass
+        else:
+            AllOtherList.append(i)
+
+        
+
+
+    check for each point if the index is higher than the i
+
+    for point in AllOtherList:
+        if point index value == i index value + 1:
+            make connection
+        else:
+            pass 
+
+    currentNumber ++
+    
+main branch = true
+family branch = false
+
+testing
