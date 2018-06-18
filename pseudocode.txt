@@ -35,7 +35,4 @@ while currentNumber <= indexHighscore:
 
     currentNumber ++
     
-main branch = true
-family branch = false
-
-testing
+main branch
