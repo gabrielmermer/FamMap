@@ -1,5 +1,3 @@
 **FamMap**
 
-made for HO
-
-family node
+made for HO by Gabriel Mermer
