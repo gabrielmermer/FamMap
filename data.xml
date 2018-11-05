@@ -1,13 +1,8 @@
-<markers>
-    <marker id="1" name="Index" surname="1" address="Dabrowskiego 71/36" lat="52.19962062609675" lng="20.411381220069984" type="alive" bio="rudy harcerz" index='1'/>
-    <marker id="1" name="Index" surname="1" address="Dabrowskiego 71/36" lat="52.10524944040546" lng="20.45669982358561" type="alive" bio="rudy harcerz" index='1'/>
-    <marker id="2" name="Index" surname="2" address="Dabrowskiego 71/36" lat="52.20145567835945" lng="20.614290766622048" type="alive" bio="rudy harcerz" index='2'/>
-    <marker id="2" name="Index" surname="2" address="Dabrowskiego 71/36" lat="52.30256759246075" lng="20.783205561543923" type="alive" bio="rudy harcerz" index='2'/>
-    <marker id="3" name="Index" surname="3" address="Dabrowskiego 71/36" lat="52.20592019565417" lng="20.977623499921492" type="alive" bio="rudy harcerz" index='3'/>  
-</markers>
-
-
-
 <!-- THIS IS JUST FOR TESTING -->
-
-
+<markers>
+    <marker id="1" name="Gabriel" surname="Mermer" address="Dabrowskiego 71/36" lat="52.19962062609675" lng="20.411381220069984" dd="2120" bio="rudy harcerz" bd="2002" index='1'/>
+    <marker id="1" name="Marcel" surname="Mermer" address="Dabrowskiego 71/36" lat="52.10524944040546" lng="20.45669982358561" dd="2975" bio="rudy harcerz" bd="2002" index='1'/>
+    <marker id="2" name="Maria" surname="Mermer" address="Dabrowskiego 71/36" lat="52.20145567835945" lng="20.614290766622048" dd="" bio="rudy harcerz" bd="2002" index='2'/>
+    <marker id="2" name="Daniel" surname="Mermer" address="Dabrowskiego 71/36" lat="52.30256759246075" lng="20.783205561543923" dd="" bio="rudy harcerz" bd="2002" index='2'/>
+    <marker id="3" name="Dead" surname="Dummy" address="Dabrowskiego 71/36" lat="52.20592019565417" lng="20.977623499921492" dd="" bio="rudy harcerz" bd="2002" index='3'/>  
+</markers>

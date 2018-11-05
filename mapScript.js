@@ -67,6 +67,7 @@
 
 
 
+
               markerDetails = []
               latlng = {'lat': markerElem.getAttribute('lat'),'lng': markerElem.getAttribute('lng')};
               markerDetails.push(latlng)
